@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { Card, Col, Layout, Row } from "antd";
+import UserTable from "./components/UserTable";
+import user from "./data/user";
+import userHistory from "./data/userHistory";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Layout.Content style={{ minHeight: "100vh" }}>
+        <Card title="User Info">
+          <Row gutter={[20, 20]}>
+            <Col span={24}>
+              <UserTable user={user} userHistory={userHistory} />
+            </Col>
+          </Row>
+        </Card>
+      </Layout.Content>
+    </Layout>
   );
-}
+};
 
 export default App;
