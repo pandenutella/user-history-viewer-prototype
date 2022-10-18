@@ -1,7 +1,7 @@
 const user = {
   id: "U001",
   name: "User 1",
-  deleted: true,
+  deleted: false,
   privileges: [
     {
       group: "A001",

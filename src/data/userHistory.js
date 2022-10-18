@@ -61,6 +61,27 @@ const userHistory = [
     updateUser: "U002",
     updateDate: "10-17-2022",
   },
+  {
+    uuid: "5",
+    operation: "CREATE",
+    updatedResourceImage: {
+      id: "U001",
+      name: "User 1",
+      deleted: false,
+      privileges: [
+        {
+          group: "A001",
+          accessLevel: 2,
+        },
+        {
+          group: "M001",
+          accessLevel: 1,
+        },
+      ],
+    },
+    updateUser: "U003",
+    updateDate: "10-18-2022",
+  },
 ];
 
 export default userHistory;
