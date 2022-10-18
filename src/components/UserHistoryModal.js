@@ -1,4 +1,4 @@
-import { Modal, Table } from "antd";
+import { Modal, Table, Tag } from "antd";
 import moment from "moment";
 import UserHistoryDiffViewer from "./UserHistoryDiffViewer";
 
@@ -15,12 +15,28 @@ const expandable = {
   expandRowByClick: true,
 };
 
+const getColorByOperation = (operation) => {
+  switch (operation) {
+    case "CREATE":
+      return "green";
+    case "UPDATE":
+      return "blue";
+    case "DELETE":
+      return "red";
+    default:
+      return null;
+  }
+};
+
 const UserHistoryModal = ({ history, visible, onHide }) => {
   const columns = [
     {
       title: "Operation",
       dataIndex: "operation",
       key: "operation",
+      render: (operation) => (
+        <Tag color={getColorByOperation(operation)}>{operation}</Tag>
+      ),
     },
     {
       title: "Update By",
