@@ -1,15 +1,24 @@
 import { HistoryOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Table, Tag, Tooltip } from "antd";
+import moment from "moment";
 import { useState } from "react";
 import UserHistoryModal from "./UserHistoryModal";
 
-const mapUserToDataSource = (user) => ({
-  key: user.id,
-  id: user.id,
-  name: user.name,
-  deleted: user.deleted,
-  privileges: user.privileges,
-});
+const formatDate = (date) => moment(date).format("MMMM DD, YYYY");
+
+const mapToDataSource = (user, userHistory) => {
+  const latestHistory = userHistory[userHistory.length - 1];
+
+  return {
+    key: user.id,
+    id: user.id,
+    name: user.name,
+    deleted: user.deleted,
+    privileges: user.privileges,
+    lastUpdateUser: latestHistory.updateUser,
+    lastUpdateDate: latestHistory.updateDate,
+  };
+};
 
 const UserTable = ({ user, userHistory }) => {
   const [historyVisible, setHistoryVisible] = useState(false);
@@ -55,6 +64,17 @@ const UserTable = ({ user, userHistory }) => {
         }),
     },
     {
+      title: "Last Updated By",
+      dataIndex: "lastUpdateUser",
+      key: "lastUpdateUser",
+    },
+    {
+      title: "Last Updated On",
+      dataIndex: "lastUpdateDate",
+      key: "lastUpdateDate",
+      render: (lastUpdateDate) => formatDate(lastUpdateDate),
+    },
+    {
       title: "Actions",
       key: "actions",
       render: () => (
@@ -64,7 +84,7 @@ const UserTable = ({ user, userHistory }) => {
       ),
     },
   ];
-  const dataSource = user ? [mapUserToDataSource(user)] : [];
+  const dataSource = user ? [mapToDataSource(user, userHistory)] : [];
 
   return (
     <>

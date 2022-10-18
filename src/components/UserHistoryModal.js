@@ -39,12 +39,12 @@ const UserHistoryModal = ({ history, visible, onHide }) => {
       ),
     },
     {
-      title: "Update By",
+      title: "Updated By",
       dataIndex: "updateUser",
       key: "updateUser",
     },
     {
-      title: "Update On",
+      title: "Updated On",
       dataIndex: "updateDate",
       key: "updateDate",
       render: (updateDate) => formatDate(updateDate),
